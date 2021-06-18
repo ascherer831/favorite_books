@@ -1,0 +1,58 @@
+.small-book {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+
+}
+
+.big-book {
+    height: 60px;
+    width: auto;
+    vertical-align: middle; 
+}
+
+.app-small {
+    font-size: 1.8em;
+    vertical-align: middle;
+    font-weight: 500;
+    margin-left: -20px;
+}
+
+.welcome {
+    font-style: italic;
+}
+
+.logout {
+    margin-right: -20px;
+    font-size: 1.4em;
+}
+
+.book-box {
+    border: 1px lightgrey solid;
+    border-radius: 4px;
+    padding: 10px 20px;
+    background-color: rgb(255,255,255);
+    margin: 15px 0px;
+}
+
+.book-box-edit {
+    border: 1px lightgrey solid;
+    border-radius: 4px;
+    background-color: rgb(255,255,255);
+    margin: 5px 0px 0px 11px;
+    padding-top: 10px;
+}
+
+.errors li {
+    list-style-type: none;
+}
+
+.book-cont {
+    overflow: scroll;
+    height: 460px;
+}
+
+.is-fav {
+
+    font-size: 0.8em;
+}

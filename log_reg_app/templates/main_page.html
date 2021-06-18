@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static%}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Welcome {{this_user.first_name}}</title>
+</head>
+<body class="container bg-light">
+    <nav class=" col-12 navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand app-small" href="/books"><img class="small-book" src="static/img/book.png" alt="Book Icon"> favebooks</a>
+        <div class="welcome">Welcome {{this_user.first_name}}</div>
+        <a class="nav-link logout" href="/user/logout">Logout</a>
+    </nav>
+    <div class="col-12 mt-5">
+        <div class="row">
+            <div class="col-4 offset-1 mb-3">
+                <h2 class="form-label text-center text-primary mb-4">Add a Favorite Book</h2>
+                <form action="/books/create" method="POST" class="row">
+                    {%csrf_token%}
+                    <div class="col-md-12 mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" name="title">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea type="text" class="form-control" name="description"></textarea>
+                    </div>
+                    <div>
+                        <input type="hidden" name="uploaded_by" value="{{this_user}}">
+                    </div>
+                    
+                    <div class="col-12mb-3">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4 offset-2 mb-3">
+                <h2 class="text-center text-primary mb-4">All Books</h2>
+                <div class="book-cont">
+                {% for book in all_books %}
+                    <div class="book-box">
+                        <a href="/books/{{book.id}}">{{book.title}}</a>
+                        <div>(Added by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}})</div>
+                        {% if this_user in book.users_who_like.all %}
+                            <div class="is-fav text-primary">This is one of your favorites</div>
+                        {% else %}
+                            <a href="/books/{{book.id}}/favorite_main">Add to Favorites</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                {%if messages%}
+                <ul class="errors">
+                    {%for message in messages%}
+                        <li class="text-danger ">{{message}}</li>
+                    {%endfor%}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
