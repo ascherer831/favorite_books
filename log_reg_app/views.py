@@ -76,7 +76,7 @@ def info(request,book_id):
     this_user = User.objects.get(id=request.session['user_id'])
     context = {
         'this_book': this_book,
-        'this_user': this_user
+        'this_user': this_user,
     }
     if this_book.uploaded_by.id == this_user.id:
         return render(request, 'edit.html', context)
